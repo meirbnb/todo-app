@@ -1,7 +1,7 @@
 # todo-app
 Todo Web App on PHP (Symfony)
 Simple ToDoList App
-![image](https://github.com/meirbnb/todo-app/assets/76254028/d4ea2dbd-7d60-4c77-8f07-2718872bdb77)
+![image](https://github.com/meirbnb/todo-app/assets/76254028/ae31f21f-c19e-4d75-8c53-9815a4414b53)
 
 TODO:
 - add task edit functionality
