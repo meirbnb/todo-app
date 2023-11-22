@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Todo App{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="taskbar">
+        <form action="{{ path('create_task') }}" method='POST'>
+            <label for="action">Task: </label>
+            <input type="text" id="action" name="name" placeholder="Ex: buy grocceries">
+            <button type="submit" class="btn">+</button>
+        </form>
+        </div>
+        <table>
+            <tr class='header'>
+                <th class="status">status</th>
+                <th class="name">task</th>
+                <th class="manage">action</th>
+            </tr>
+            {% if tasks %}
+                {% for task in tasks %}
+                    <tr>
+                        <form action="{{ path('toggle', {'id': task.id}) }}" method="POST">
+                            <td>
+                                <input type="checkbox" {{ task.completed ? "checked" : "" }}>
+                                <button type="submit" class="hidden"></button>
+                            </td>
+                        </form>
+                        <td class="text-left">
+                            {% if task.completed %}
+                                <s>{{ task.name }}</s>
+                            {% else %}
+                                {{ task.name }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {# <form action="{{ path('edit', {'id': task.id}) }}" method="POST">
+                                <button type="submit" class="btn editBtn">✎</button>
+                            </form> #}
+                            <form action="{{ path('delete', {'id': task.id}) }}" method="POST">
+                                <button type="submit" class="btn">×</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="3" class="empty">no tasks found</td>
+                </tr>
+            {% endif %}
+        </table>
+    </div>
+{% endblock %}
