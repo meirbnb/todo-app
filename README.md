@@ -21,3 +21,4 @@ TODO:
 - add task edit functionality
 - add csrf protection to forms (security issue)
 - add frontend framework (vue.js or react.js) and make requests to endpoints dynamically (i.e w/o page reloading).
+- ability to drag and change task orders
