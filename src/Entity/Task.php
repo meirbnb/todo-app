@@ -23,7 +23,7 @@ class Task
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private \DateTimeInterface $last_modified;
 
-    public function __construct(?string $taskname, bool $completed = false, \DateTime $date = new \DateTime("now")){
+    public function __construct(?string $taskname = null, bool $completed = false, \DateTime $date = new \DateTime("now")){
         $this->name = $taskname;
         $this->completed = $completed;
         $this->last_modified = $date;
