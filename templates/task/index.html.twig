@@ -22,8 +22,8 @@
                     <tr>
                         <form action="{{ path('toggle', {'id': task.id}) }}" method="POST">
                             <td>
-                                <input type="checkbox" {{ task.completed ? "checked" : "" }}>
-                                <button type="submit" class="hidden"></button>
+                                <input type="checkbox" {{ task.completed ? "checked" : "" }}
+                                onclick="this.form.submit()">
                             </td>
                         </form>
                         <td class="text-left">

@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends AbstractController
 {
     public function __construct(private TaskRepository $taskRepository){}
+    
     #[Route('/task', name: 'app_tasks')]
     public function index(): Response
     {
