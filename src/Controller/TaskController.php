@@ -13,7 +13,7 @@ class TaskController extends AbstractController
 {
     public function __construct(private TaskRepository $taskRepository){}
     
-    #[Route('/task', name: 'app_tasks')]
+    #[Route('/tasks', name: 'app_tasks')]
     public function index(): Response
     {
         return $this->render('task/index.html.twig', [
