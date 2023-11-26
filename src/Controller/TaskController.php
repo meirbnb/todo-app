@@ -21,40 +21,49 @@ class TaskController extends AbstractController
         ]);
     }
 
-    #[Route('/create', name: 'create_task', methods: ['POST'])]
+    #[Route('task/create', name: 'create_task', methods: ['POST'])]
     public function create(Request $request): Response
     {
-        $taskName = $request->getPayload()->get('name');
-        $task = new Task();
-        $task->setName($taskName);
-        $task->setCompleted(false);
-        $task->setLastModified((new \DateTime()));
-        $this->taskRepository->save($task);
+        $taskName = $request->request->get('name');
+        $token = $request->request->get('token');
+        if ($this->isCsrfTokenValid('some random text', $token)){
+            $task = new Task($taskName, false, new \DateTime());
+            $this->taskRepository->save($task);
+        }
         return $this->redirectToRoute('app_tasks');
     }
 
-    #[Route('/toggle/{id}', 'toggle', methods: ['POST'])]
-    public function toggle($id): Response
+    #[Route('task/{id}/toggle', 'toggle', methods: ['POST'])]
+    public function toggle($id, Request $request): Response
     {
         $task = $this->taskRepository->find($id);
-        $task->setCompleted(!$task->isCompleted());
-        $this->taskRepository->save($task);
+        $token = $request->request->get('token');
+        if ($this->isCsrfTokenValid('some random text', $token)){
+            $task->setCompleted(!$task->isCompleted());
+            $this->taskRepository->save($task);
+        }
         return $this->redirectToRoute('app_tasks');
     }
 
-    #[Route('/delete/{id}', 'delete', methods: ['POST'])]
-    public function delete($id): Response
+    #[Route('task/{id}/delete', 'delete', methods: ['POST'])]
+    public function delete($id, Request $request): Response
     {
-        $task = $this->taskRepository->find($id);
-        $this->taskRepository->delete($task);
+        $token = $request->request->get('token');
+        if ($this->isCsrfTokenValid('some random text', $token)){
+            $task = $this->taskRepository->find($id);
+            $this->taskRepository->delete($task);
+        }
         return $this->redirectToRoute('app_tasks');
     }
 
-    #[Route('/edit/{id}', 'edit', methods: ['POST'])]
-    public function edit($id): Response
+    #[Route('task/{id}/edit', 'edit', methods: ['POST'])]
+    public function edit($id, Request $request): Response
     {
         $task = $this->taskRepository->find($id);
-        dd($task);
+        $token = $request->request->get('token');
+        if ($this->isCsrfTokenValid('some random text', $token)){
+            dd($task);
+        }
         return $this->redirectToRoute('app_tasks');
     }
 }

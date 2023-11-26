@@ -9,6 +9,7 @@
             <label for="action">Task: </label>
             <input type="text" id="action" name="name" placeholder="Ex: buy grocceries">
             <button type="submit" class="btn">+</button>
+            <input type="hidden" name="token" value="{{ csrf_token('some random text') }}">
         </form>
         </div>
         <table>
@@ -25,6 +26,7 @@
                                 <input type="checkbox" {{ task.completed ? "checked" : "" }}
                                 onclick="this.form.submit()">
                             </td>
+                            <input type="hidden" name="token" value="{{ csrf_token('some random text') }}">
                         </form>
                         <td class="text-left">
                             {% if task.completed %}
@@ -34,11 +36,9 @@
                             {% endif %}
                         </td>
                         <td>
-                            {# <form action="{{ path('edit', {'id': task.id}) }}" method="POST">
-                                <button type="submit" class="btn editBtn">✎</button>
-                            </form> #}
                             <form action="{{ path('delete', {'id': task.id}) }}" method="POST">
                                 <button type="submit" class="btn">×</button>
+                                <input type="hidden" name="token" value="{{ csrf_token('some random text') }}">
                             </form>
                         </td>
                     </tr>
